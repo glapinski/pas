@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+
+    <context-param>
+        <param-name>jersey.config.jsonFeature</param-name>
+        <param-value>JacksonFeature</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <context-param>
+        <param-name>application.description</param-name>
+        <param-value>Library App Rest Api</param-value>
+    </context-param>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>All</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+    <env-entry>
+        <env-entry-name>SECRET</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>
+            258AbqJCvhoWtVSI64m7Xpb6tpSJKpt6d7GRep82csg7jJzo9yu2whTOSQmkMjfpc2srXurE0G9LNn3NWbbT0yFgmWeW1y3VjB0sS-f0aUYOj4oYeGA-fK2G8Ju-sqDH16TRy1Es0pf1BhcbhFHARSnL9Y7QdA9us-KN_KTHqDc
+        </env-entry-value>
+    </env-entry>
+
+</web-app>
