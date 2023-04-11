@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ul class="navbar-nav mr-auto" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">#{msg.menu_tab_product}</a>
+        <div class="dropdown-menu">
+            <h:link styleClass="nav-link" outcome="ListAllProducts">#{msg.menu_ListAllProducts}</h:link>
+            <h:link styleClass="nav-link" outcome="AddNewProduct">#{msg.menu_newProduct}</h:link>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">#{msg.menu_tab_order}</a>
+        <div class="dropdown-menu">
+            <h:link styleClass="nav-link" outcome="ListAllRents">#{msg.menu_ListAllRents}</h:link>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Profile</a>
+        <div class="dropdown-menu">
+            <h:link styleClass="nav-link"  outcome="EditProfile">Edit profile</h:link>
+            <h:link styleClass="nav-link"  outcome="ChangePassword">Change password</h:link>
+        </div>
+    </li>
+    <h:form>
+        <h:commandButton action="${jwtTokenHolderBean.logout()}" value="Logout"/>
+    </h:form>
+</ul>

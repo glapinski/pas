@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div class="navbar-nav mr-auto" xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:h="http://xmlns.jcp.org/jsf/html"
+     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+     xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <div class="row">
+        <div class="col-md-3">
+            #{msg.product_genre}
+        </div>
+        <div class="col-md-3">
+            <h:inputText styleClass="" value="#{editProductController.currentProduct.genre}"
+                         required="true"
+                         requiredMessage="#{msg.product_genre}"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            #{msg.product_pageAmount}
+        </div>
+        <div class="col-md-3">
+            <h:inputText styleClass=""
+                         value="#{editProductController.currentProduct.pageAmount}"
+                         required="true"
+                         requiredMessage="#{msg.product_pageAmount}"/>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ul class="navbar-nav mr-auto" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">#{msg.menu_tab_user}</a>
+        <div class="dropdown-menu">
+            <h:link styleClass="nav-link" rendered="${viewUtils.isAdmin()}" outcome="ListAllUsers">#{msg.menu_ListAllUsers}</h:link>
+            <h:link styleClass="nav-link" rendered="${viewUtils.isAdmin()}" outcome="NewUser">#{msg.menu_createUser}</h:link>
+            <h:link styleClass="nav-link" rendered="${viewUtils.isUnauthorized()}" outcome="Register">#{msg.menu_register}</h:link>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">#{msg.menu_tab_product}</a>
+        <div class="dropdown-menu">
+            <h:link styleClass="nav-link" outcome="ListAllProducts">#{msg.menu_ListAllProducts}</h:link>
+            <h:link styleClass="nav-link" rendered="${viewUtils.isManager()}" outcome="AddNewProduct">#{msg.menu_newProduct}</h:link>
+        </div>
+    </li>
+    <h:form rendered="${!viewUtils.isUnauthorized()}">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">#{msg.menu_tab_order}</a>
+        <div class="dropdown-menu">
+            <h:link styleClass="nav-link" rendered="${viewUtils.isAdmin()}" outcome="ListAllRents">#{msg.menu_ListAllOrders}</h:link>
+            <h:link styleClass="nav-link" rendered="${viewUtils.isBaseUser()}" outcome="ListUserOrders">Moje zamowienia</h:link>
+        </div>
+    </li>
+    </h:form>
+    <h:form rendered="${viewUtils.isUnauthorized()}">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Login</a>
+        <div class="dropdown-menu">
+            <h:link styleClass="nav-link" outcome="Login">Login</h:link>
+        </div>
+    </li>
+    </h:form>
+    <h:form rendered="${!viewUtils.isUnauthorized()}">
+        <h:commandButton rendered="${!viewUtils.isUnauthorized()}" action="${jwtTokenHolderBean.logout()}" value="Logout"/>
+    </h:form>
+</ul>

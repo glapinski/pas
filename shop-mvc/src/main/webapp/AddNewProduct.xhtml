@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="templates/MainTemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
+   <ui:define name="title">#{msg.product_edit_title}</ui:define>
+
+   <ui:define name="content">
+      <h:form id="modify">
+         <h:selectOneMenu  id="selectedMenu" value="#{addProductController.productType}">
+            <f:selectItem itemLabel="Movie" itemValue="Movie"/>
+            <f:selectItem itemLabel="Book" itemValue="Book"/>
+            <f:ajax event="change" render="@form" listener="#{addProductController.updateProduct()}"/>
+         </h:selectOneMenu>
+         <div class="row">
+            <div class="col-md-3">
+               #{msg.product_title}
+            </div>
+            <div class="col-md-3">
+               <h:inputText styleClass="" value="#{addProductController.currentProduct.title}"
+                            required="true"
+                            requiredMessage="#{msg.product_requiredName}"
+                            validatorMessage="#{msg.validatorMessageProductName}">
+                  <f:validateRegex pattern="[A-Za-ząćęłńóśżźĄĆĘŁŃÓŚŻŹ]{2,}"/>
+               </h:inputText>
+
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-3">
+               #{msg.product_price}
+            </div>
+            <div class="col-md-3">
+               <h:inputText styleClass=""
+                            value="#{addProductController.currentProduct.price}"
+                            required="true"
+                            requiredMessage="#{msg.product_requiredPrice}"
+                            validatorMessage="#{msg.validatorMessageProductPrice}">
+                  <f:validateDoubleRange minimum="0"/>
+               </h:inputText>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-3">
+               #{msg.product_author}
+            </div>
+            <div class="col-md-3">
+               <h:inputText styleClass=""
+                            value="#{addProductController.currentProduct.author}"
+                            required="true"
+                            requiredMessage="#{msg.product_requiredProducer}"
+                            validatorMessage="#{msg.validatorMessageProductProducer}">
+                  <f:validateRegex pattern="[A-Za-ząćęłńóśżźĄĆĘŁŃÓŚŻŹ]{2,}"/>
+               </h:inputText>
+            </div>
+         </div>
+         <h:panelGroup rendered="#{addProductController.productType eq 'Book'}">
+            <ui:include src="AddBookTemplate.xhtml"></ui:include>
+         </h:panelGroup>
+         <h:panelGroup rendered="#{addProductController.productType eq 'Movie'}">
+            <ui:include src="AddMovieTemplate.xhtml"></ui:include>
+         </h:panelGroup>
+         <h:commandButton value="#{msg.update}"
+                          action="#{addProductController.add()}"/>
+         <h:commandButton value="#{msg.return}" action="ListAllProducts" immediate="true"/>
+      </h:form>
+   </ui:define>
+</ui:composition>

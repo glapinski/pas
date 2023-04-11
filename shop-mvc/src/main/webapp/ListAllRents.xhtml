@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="templates/MainTemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="title">#{msg.orders_list_title}</ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <h:dataTable styleClass="table table-hover table-striped table-bordered" value="#{rentsController.rents}" var="rent">
+                <h:column>
+                    <f:facet name="header">#{msg.rent_id}</f:facet>
+                    ${rent.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.rent_customer}</f:facet>
+                    ${rent.customer.login}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.rent_rentDate}</f:facet>
+                    ${rent.rentDate}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.rent_endRentDate}</f:facet>
+                    ${rent.endRentDate}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.rent_finished}</f:facet>
+                    ${rent.finished}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.rent_product}</f:facet>
+                    <ui:repeat value="${rent.product}" var="product">
+                        <h:outputText value="Product"/><br/>
+                        <h:outputLabel>${msg.product_title}: </h:outputLabel>
+                        <h:outputText value="${product.title}"/><br/>
+                        <h:outputLabel>${msg.product_author}: </h:outputLabel>
+                        <h:outputText value="${product.author}"/><br/>
+                    </ui:repeat>
+                </h:column>
+                <h:column rendered="${viewUtils.isManager()}">
+                    <!--<h:commandButton value="#{msg.deliverOrder}" action="#{ordersController.deliverOrder(rent)}" immediate="true"/>-->
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

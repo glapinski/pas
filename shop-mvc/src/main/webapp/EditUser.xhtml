@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="templates/MainTemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="title">#{msg.user_edit_title}</ui:define>
+
+    <ui:define name="content">
+        <div id="container">
+            <h:form id="Modificaton">
+                <div class="row">
+                    <div class="col-md-3">
+                        #{msg.user_field_type}
+                    </div>
+                    <div class="col-md-3">
+                        <h:selectOneListbox size="0" id="selectedMenu" value="#{editUserController.userType}">
+                            <f:selectItem itemLabel="BaseUser" itemValue="BaseUser" />
+                            <f:selectItem itemLabel="Manager" itemValue="Manager" />
+                            <f:selectItem itemLabel="Admin" itemValue="Admin" />
+                        </h:selectOneListbox>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        #{msg.user_field_type}
+                    </div>
+                    <div class="col-md-3">
+                        <h:inputText styleClass=""
+                                     value="#{editUserController.currentUser.role}"
+                                     required="true"
+                                     requiredMessage="#{msg.address_field_zipCode}"
+                                     readonly="true"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        #{msg.user_field_first_name}
+                    </div>
+                    <div class="col-md-3">
+                        <h:inputText styleClass=""
+                                     value="#{editUserController.currentUser.firstName}"
+                                     required="true"
+                                     requiredMessage="#{msg.requiredName}"
+                                     validatorMessage="#{msg.validatorMessageName}">
+                        <f:validateRegex pattern="[A-Za-ząćęłńóśżźĄĆĘŁŃÓŚŻŹ]{2,}"/>
+                        </h:inputText>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        #{msg.user_field_last_name}
+                    </div>
+                    <div class="col-md-3">
+                        <h:inputText styleClass=""
+                                     value="#{editUserController.currentUser.lastName}"
+                                     required="true"
+                                     requiredMessage="#{msg.requiredLastName}"
+                                     validatorMessage="#{msg.validatorMessageLastName}" >
+                        <f:validateRegex pattern="[A-Za-ząćęłńóśżźĄĆĘŁŃÓŚŻŹ]{2,}"/>
+                        </h:inputText>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        #{msg.user_field_account_balance}
+                    </div>
+                    <div class="col-md-3">
+                        <h:inputText styleClass=""
+                                     value="#{editUserController.currentUser.accountBalance}"
+                                     required="true"
+                                     requiredMessage="#{msg.requiredAccountBalance}"
+                                     validatorMessage="#{msg.validatorMessageAccountBalance}" >
+                        <f:validateDoubleRange minimum="0"/>
+                        </h:inputText>
+                    </div>
+                </div>
+                <div class="h5">#{msg.address}</div>
+                <div class="row">
+                    <div class="col-md-3">
+                        #{msg.address_field_country}
+                    </div>
+                    <div class="col-md-3">
+                        <h:inputText styleClass=""
+                                     value="#{editUserController.currentUser.address.country}"
+                                     required="true"
+                                     requiredMessage="#{msg.requiredCountry}"
+                                     validatorMessage="#{msg.validatorMessageCountry}">
+                        <f:validateRegex pattern="[A-Za-ząćęłńóśżźĄĆĘŁŃÓŚŻŹ]{2,}"/>
+                        </h:inputText>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        #{msg.address_field_city}
+                    </div>
+                    <div class="col-md-3">
+                        <h:inputText styleClass=""
+                                     value="#{editUserController.currentUser.address.city}"
+                                     required="true"
+                                     requiredMessage="#{msg.requiredCity}"
+                                     validatorMessage="#{msg.validatorMessageCity}">
+                        <f:validateRegex pattern="[A-Za-ząćęłńóśżźĄĆĘŁŃÓŚŻŹ]{2,}"/>
+                        </h:inputText>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        #{msg.address_field_street}
+                    </div>
+                    <div class="col-md-3">
+                        <h:inputText styleClass=""
+                                     value="#{editUserController.currentUser.address.street}"
+                                     required="true"
+                                     requiredMessage="#{msg.requiredStreet}"
+                                     validatorMessage="#{msg.validatorMessageStreet}" >
+                         <f:validateRegex pattern="[A-Za-ząćęłńóśżźĄĆĘŁŃÓŚŻŹ]{2,}"/>
+                        </h:inputText>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        #{msg.address_field_houseNumer}
+                    </div>
+                    <div class="col-md-3">
+                        <h:inputText styleClass=""
+                                     value="#{editUserController.currentUser.address.houseNumber}"
+                                     required="true"
+                                     requiredMessage="#{msg.requiredHouseNumber}"
+                                     validatorMessage="#{msg.validatorMessageHouseNumber}">
+                        <f:validateLongRange minimum="0"/>
+                        </h:inputText>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        #{msg.address_field_zipCode}
+                    </div>
+                    <div class="col-md-3">
+                        <h:inputText styleClass=""
+                                     value="#{editUserController.currentUser.address.zipCode}"
+                                     required="true"
+                                     requiredMessage="#{msg.requiredZipCode}"
+                                     validatorMessage="#{msg.validatorMessageZipCode}" >
+                        <f:validateRegex pattern="[0-9]{2}-[0-9]{3}"></f:validateRegex>
+                        </h:inputText>
+                    </div>
+                </div>
+
+                <h:commandButton value="#{msg.change}" action="#{editUserController.update()}"
+                                 class="positive_btn"/>
+                <h:commandButton value="#{msg.return}" action="ListAllUsers" immediate="true"/>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

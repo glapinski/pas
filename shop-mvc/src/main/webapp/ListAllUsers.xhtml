@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="templates/MainTemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="title">#{msg.users_list_title}</ui:define>
+
+    <ui:define name="content">
+        <h:form id="filterForm">
+            <h:inputText a:placeholder="szukaj" id="search" styleClass="js-filter" value="#{listAllUsersController.searchInput}"/>
+            <h:commandButton value="szukaj" action="#{listAllUsersController.getSearchedUsers()}"/>
+        </h:form>
+        <h:form>
+            <h:dataTable styleClass="table table-hover table-striped table-bordered" value="#{listAllUsersController.currentUsers}" var="user">
+                <h:column>
+                    <f:facet name="header">#{msg.user_field_first_name}</f:facet>
+                    ${user.firstName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.user_field_last_name}</f:facet>
+                    ${user.lastName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.user_field_login}</f:facet>
+                    ${user.login}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.user_field_account_balance}</f:facet>
+                    ${user.accountBalance}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.user_field_suspended}</f:facet>
+                    ${user.suspended}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.user_field_type}</f:facet>
+                    ${user.role}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.actions}</f:facet>
+                    <h:commandButton id="changeUserStatusBtn" action="#{listAllUsersController.suspendOrResumeUser(user)}" class="negative_btn" value="#{msg.user_suspend_msg}">
+                    </h:commandButton>
+                    <h:commandButton id="editUserBtn" action="#{listAllUsersController.editUser(user)}" class="negative_btn" value="#{msg.user_edit}">
+                    </h:commandButton>
+                    <h:commandButton id="userDetailsButton" action="#{listAllUsersController.getDetails(user)}" class="negative_btn" value="#{msg.user_details}">
+                    </h:commandButton>
+                    <h:commandButton id="cartButton" action="#{listAllUsersController.getCart(user)}" class="negative_btn" value="#{msg.user_cart}">
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

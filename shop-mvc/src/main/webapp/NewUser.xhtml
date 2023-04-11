@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="templates/MainTemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="title">#{msg.user_edit_title}</ui:define>
+
+    <ui:define name="content">
+        <div id="container">
+            <h:form id="creation">
+                <div class="row">
+                    <div class="col-md-3">
+                        #{msg.user_field_type}
+                    </div>
+                    <div class="col-md-3">
+                        <h:selectOneListbox size="0" id="selectedMenu" value="#{addUserController.userType}">
+                            <f:selectItem itemLabel="BaseUser" itemValue="BaseUser" />
+                            <f:selectItem itemLabel="Manager" itemValue="Manager" />
+                            <f:selectItem itemLabel="Admin" itemValue="Admin" />
+                        </h:selectOneListbox>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        #{msg.user_field_login}
+                    </div>
+                    <div class="col-md-3">
+                        <h:inputText styleClass=""
+                                     value="#{addUserController.currentUser.login}"
+                                     required="true"
+                                     validator="#{listAllUsersController.loginValidator}">
+                        </h:inputText>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        #{msg.user_field_first_name}
+                    </div>
+                    <div class="col-md-3">
+                        <h:inputText styleClass=""
+                                     value="#{addUserController.currentUser.firstName}"
+                                     required="true"
+                                     requiredMessage="#{msg.requiredName}"
+                                     validatorMessage="#{msg.validatorMessageName}">
+                            <f:validateRegex pattern="[A-Za-ząćęłńóśżźĄĆĘŁŃÓŚŻŹ]{2,}"/>
+                        </h:inputText>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        #{msg.user_field_last_name}
+                    </div>
+                    <div class="col-md-3">
+                        <h:inputText styleClass=""
+                                     value="#{addUserController.currentUser.lastName}"
+                                     required="true"
+                                     requiredMessage="#{msg.requiredLastName}"
+                                     validatorMessage="#{msg.validatorMessageLastName}" >
+                            <f:validateRegex pattern="[A-Za-ząćęłńóśżźĄĆĘŁŃÓŚŻŹ]{2,}"/>
+                        </h:inputText>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        #{msg.user_field_account_balance}
+                    </div>
+                    <div class="col-md-3">
+                        <h:inputText styleClass=""
+                                     value="#{addUserController.currentUser.accountBalance}"
+                                     required="true"
+                                     requiredMessage="#{msg.requiredAccountBalance}"
+                                     validatorMessage="#{msg.validatorMessageAccountBalance}" >
+                            <f:validateDoubleRange minimum="0"/>
+                        </h:inputText>
+                    </div>
+                </div>
+                <h:commandButton value="#{msg.change}" action="#{addUserController.add()}"
+                                 class="positive_btn"/>
+                <h:commandButton value="#{msg.return}" action="ListAllUsers" immediate="true"/>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

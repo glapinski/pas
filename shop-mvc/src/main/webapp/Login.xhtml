@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="templates/MainTemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <ui:define name="title">#{msg.login_title}</ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <div class="row">
+                <div class="col-md-3">
+                    login
+                </div>
+                <div class="col-md-3">
+                    <h:inputText styleClass=""
+                                 value="#{authController.login}"
+                                 required="true">
+                    </h:inputText>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    password
+                </div>
+                <div class="col-md-3">
+                    <h:inputSecret tyleClass=""
+                                   value="#{authController.password}"
+                                   required="true">
+                    </h:inputSecret>
+                </div>
+            </div>
+            <h:commandButton value="Zaloguj" action="#{authController.login()}" />
+            <h:commandButton value="#{msg.return}" action="start" immediate="true"/>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

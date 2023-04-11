@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="templates/MainTemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="title">#{msg.products_list_title}</ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <h:dataTable styleClass="table table-hover table-striped table-bordered" value="#{listAllProductsController.currentProducts}" var="product">
+                <h:column>
+                    <f:facet name="header">#{msg.product_Id}</f:facet>
+                    ${product.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.product_title}</f:facet>
+                    ${product.title}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.product_price}</f:facet>
+                    ${product.price}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.product_author}</f:facet>
+                    ${product.author}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.product_isAvailable}</f:facet>
+                    ${product.isAvailable}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.product_category}</f:facet>
+                    ${viewUtils.getClassName(product)}
+                </h:column>
+                <h:column>
+                    <h:commandButton id="productDetailsBtn" action="#{listAllProductsController.getDetails(product)}" class="negative_btn" value="#{msg.details}">
+                    </h:commandButton>
+                    <h:commandButton id="productEditBtn" rendered="${viewUtils.isManager()}" action="#{listAllProductsController.editProduct(product)}" class="negative_btn" value="#{msg.edit}">
+                    </h:commandButton>
+                    <h:commandButton id="productDeleteBtn" rendered="${viewUtils.isManager()}" action="#{listAllProductsController.delete(product)}" class="negative_btn" value="#{msg.delete}">
+                    </h:commandButton>
+                    <h:commandButton value="#{msg.createRent}" rendered="${viewUtils.isBaseUser()}" action="#{userRentController.createRent(product)}" immediate="true">
+                </h:commandButton>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

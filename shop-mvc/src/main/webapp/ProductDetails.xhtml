@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="templates/MainTemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <ui:define name="title">#{msg.user_details_title}</ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <div class="row">
+                <div class="col-md-3">
+                    #{msg.product_field_id}
+                </div>
+                <div class="col-md-3">
+                    <h:inputText styleClass="" value="#{editProductController.currentProduct.id}"
+                                 required="true"
+                                 requiredMessage="#{msg.product_field_name}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    #{msg.product_field_name}
+                </div>
+                <div class="col-md-3">
+                    <h:inputText styleClass="" value="#{editProductController.currentProduct.title}"
+                                 required="true"
+                                 requiredMessage="#{msg.product_field_name}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    #{msg.product_field_price}
+                </div>
+                <div class="col-md-3">
+                    <h:inputText styleClass=""
+                                 value="#{editProductController.currentProduct.price}"
+                                 required="true"
+                                 requiredMessage="#{msg.product_field_price}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    #{msg.product_field_producer}
+                </div>
+                <div class="col-md-3">
+                    <h:inputText styleClass=""
+                                 value="#{editProductController.currentProduct.author}"
+                                 required="true"
+                                 requiredMessage="#{msg.product_field_producer}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    #{msg.product_field_description}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    #{msg.product_field_availableAmount}
+                </div>
+                <div class="col-md-3">
+                    <h:inputText styleClass=""
+                                 value="#{editProductController.currentProduct.availableAmount}"
+                                 required="true"
+                                 requiredMessage="#{msg.user_field_address}"/>
+                </div>
+            </div>
+            <h:panelGroup rendered="#{editProductController.productType eq 'Movie'}">
+                <ui:include src="EditMovie.xhtml"></ui:include>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{editProductController.productType eq 'Book'}">
+                <ui:include src="EditBook.xhtml"></ui:include>
+            </h:panelGroup>
+        </h:form>
+        <h:form rendered="#{productDetailsController.currentProductOrders.size() != 0}">
+            <div class="h3">Zamowienia zawierajace produkt</div>
+            <h:dataTable styleClass="table table-hover table-striped table-bordered"
+                         rendered="${viewUtils.isAdmin() || viewUtils.isManager()}" value="#{editProductController.currentProductOrders}" var="rent">
+                <h:column>
+                    <f:facet name="header">#{msg.order_field_id}</f:facet>
+                    ${rent.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.order_field_customer}</f:facet>
+                    ${rent.customer.login}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.order_field_address}</f:facet>
+                    #{viewUtils.addressToUiView(rent.address)}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.order_field_creationDate}</f:facet>
+                    ${rent.creationDate}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.order_field_deliveryDate}</f:facet>
+                    ${rent.deliveryDate}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.order_field_paid}</f:facet>
+                    ${rent.paid}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.order_field_price}</f:facet>
+                    ${rent.price}
+                </h:column>
+            </h:dataTable>
+        </h:form>
+        <h:form>
+            <h:commandButton value="#{msg.return}" action="ListAllProducts" immediate="true"/>
+        </h:form>
+    </ui:define>
+</ui:composition>

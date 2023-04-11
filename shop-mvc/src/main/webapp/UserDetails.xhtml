@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="templates/MainTemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <ui:define name="title">#{msg.user_details_title}</ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <div class="row">
+                <div class="col-md-3">
+                    #{msg.user_field_login}
+                </div>
+                <div class="col-md-3">
+                    <h:inputText styleClass="" value="#{editUserController.currentUser.login}" required="true" requiredMessage="#{msg.user_field_login} #{msg.form_isRequired}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    #{msg.user_field_first_name}
+                </div>
+                <div class="col-md-3">
+                    <h:inputText styleClass="" value="#{editUserController.currentUser.firstName}" required="true" requiredMessage="#{msg.user_field_first_name} #{msg.form_isRequired}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    #{msg.user_field_last_name}
+                </div>
+                <div class="col-md-3">
+                    <h:inputText styleClass="" value="#{editUserController.currentUser.lastName}" required="true" requiredMessage="#{msg.user_field_last_name} #{msg.form_isRequired}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    #{msg.user_field_account_balance}
+                </div>
+                <div class="col-md-3">
+                    <h:inputText styleClass="" value="#{editUserController.currentUser.accountBalance}" required="true" requiredMessage="#{msg.user_field_account_balance} #{msg.form_isRequired}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    #{msg.user_field_type}
+                </div>
+                <div class="col-md-3">
+                    <h:inputText styleClass="" value="#{editUserController.currentUser.role}" required="true" requiredMessage="#{msg.user_field_type} #{msg.form_isRequired}"/>
+                </div>
+            </div>
+        </h:form>
+        <h:form rendered="#{editUserController.currentUserRents.size() != 0}">
+            <div class="h3">User rents</div>
+            <h:dataTable styleClass="table table-hover table-striped table-bordered"
+                         value="#{editUserController.currentUserRents}" var="rent">
+                <h:column>
+                    <f:facet name="header">#{msg.rent_id}</f:facet>
+                    ${rent.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.rent_customer}</f:facet>
+                    ${rent.customer.login}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.rent_rentDate}</f:facet>
+                    ${rent.rentDate}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg.rent_endRentDate}</f:facet>
+                    ${rent.endRentDate}
+                </h:column>
+            </h:dataTable>
+        </h:form>
+        <h:form>
+            <h:commandButton value="#{msg.return}" action="ListAllUsers" immediate="true"/>
+        </h:form>
+    </ui:define>
+</ui:composition>
